@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BarcodeDemo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_scan">Scan</string>
+    <string name="action_generate">Generate</string>
+    <string name="generation_enter_barcode_hint">Enter Barcode</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BarcodeView">
+        <!-- These values must correspond to values in generation.model.BarcodeFormatCrossReference -->
+        <attr name="barcode_format" format="enum">
+            <enum name="ean_8" value="1"/>
+            <enum name="upc_e" value="2"/>
+            <enum name="ean_13" value="3"/>
+            <enum name="upc_a" value="4"/>
+            <enum name="qr_code" value="5"/>
+            <enum name="code_39" value="6"/>
+            <enum name="code_128" value="7"/>
+            <enum name="itf" value="8"/>
+            <enum name="pdf_417" value="9"/>
+            <enum name="codabar" value="10"/>
+            <enum name="data_matrix" value="11"/>
+            <enum name="aztec" value="12"/>
+        </attr>
+        <attr name="barcode_text" format="string"/>
+        <attr name="barcode_character_set" format="string"/>
+        <attr name="barcode_foreground_color" format="color"/>
+        <attr name="barcode_background_color" format="color"/>
+    </declare-styleable>
+</resources>
