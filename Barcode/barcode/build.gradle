@@ -1,11 +1,10 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jfrog.artifactory-upload'
 
 group = "com.bottlerocketstudios"
-version = "1.0.3-SNAPSHOT"
+version = "1.0.3"
 
 project.ext.artifactory_artifactid = "barcode"
 project.ext.artifactory_packaging = "aar"
