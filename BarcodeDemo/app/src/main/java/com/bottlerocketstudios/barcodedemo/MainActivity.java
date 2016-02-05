@@ -16,13 +16,22 @@
 
 package com.bottlerocketstudios.barcodedemo;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    private static final int REQUEST_CODE_CAMERA_PERMISSION = 128;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_scan) {
-            startActivity(new Intent(this, ScanningActivity.class));
+            attemptToLaunchScanning();
             return true;
         } else if (id == R.id.action_generate) {
             startActivity(new Intent(this, GenerationActivity.class));
@@ -55,4 +64,30 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void attemptToLaunchScanning() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            finishLaunchingScanning();
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_CAMERA_PERMISSION:
+                if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    finishLaunchingScanning();
+                }
+                break;
+            default:
+                Log.e(TAG, "Unrecognized permission result");
+        }
+    }
+
+    private void finishLaunchingScanning() {
+        startActivity(new Intent(this, ScanningActivity.class));
+    }
+
 }

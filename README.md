@@ -31,7 +31,7 @@ Include the library in your project with the compile directive in your dependenc
 
         dependencies {
             ...
-            compile ('com.bottlerocketstudios:barcode:1.0.2@aar') {
+            compile ('com.bottlerocketstudios:barcode:1.0.3@aar') {
                 transitive = true;
             }
         }
@@ -53,7 +53,7 @@ Now add the BarcodeView somewhere in your layout.
 **The layout width and height cannot be wrap_content as that doesn't have a real meaning for a barcode.** There is no intrinsic size of most barcodes and the ImageView's bitmap has not been set to be measured until the barcode is created. 
  		
 #### Standard Detector Operation
-The BarcodeDemo project's ScanningActivity is the best source for an example implementation. Clone this repo or browse the source to look at that Activity. 
+The BarcodeDemo project's ScanningActivity is the best source for an example implementation. Clone this repo or browse the source to look at that Activity. Be sure to pay attention to the manifest permissions. 
  	   
 ### Build
 This project must be built with gradle. 
