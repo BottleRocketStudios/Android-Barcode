@@ -1,17 +1,16 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.jfrog.artifactory-upload'
 
 group = "com.bottlerocketstudios"
-version = "1.0.3-SNAPSHOT"
+version = "1.0.3"
 
 project.ext.artifactory_artifactid = "barcode"
 project.ext.artifactory_packaging = "aar"
 project.ext.artifactory_description = "Barcode scanning and generation library"
 project.ext.artifactory_project_url = "https://github.com/BottleRocketStudios/Android-Barcode"
-project.ext.artifactory_name = "Barcode"
+project.ext.artifactory_name = "com.bottlerocketstudios.barcode"
 project.ext.artifactory_vcs_url = "https://github.com/BottleRocketStudios/Android-Barcode"
 
 project.ext.bundle_name = "barcode"
@@ -23,8 +22,6 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName project.version
     }
 }
 
@@ -58,6 +55,31 @@ def getMavenUser() {
 
 def getMavenPassword() {
     return getMavenIdentityField('br_bintray_password', 1)
+}
+
+android.libraryVariants.all { variant ->
+    def javadocTask = task("android${variant.name.capitalize()}Javadoc", type: Javadoc, dependsOn: "assemble${variant.name.capitalize()}") {
+        source = variant.javaCompile.source
+        classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath())
+        exclude '**/BuildConfig.java'
+        exclude '**/R.java'
+    }
+    def javadocJarTask = task("android${variant.name.capitalize()}JavadocJar", type: Jar, dependsOn: javadocTask){
+        classifier = 'javadoc'
+        from javadocTask.destinationDir
+    }
+    if (variant.buildType.name.equals(com.android.builder.core.BuilderConstants.RELEASE)) {
+        artifacts.add('archives', javadocJarTask);
+    }
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+artifacts {
+    archives androidSourcesJar
 }
 
 install {

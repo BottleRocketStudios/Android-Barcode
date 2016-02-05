@@ -31,7 +31,7 @@ Include the library in your project with the compile directive in your dependenc
 
         dependencies {
             ...
-            compile ('com.bottlerocketstudios:barcode:1.0.2@aar') {
+            compile ('com.bottlerocketstudios:barcode:1.0.3@aar') {
                 transitive = true;
             }
         }
