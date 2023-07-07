@@ -1,5 +1,12 @@
 Barcode - Android
 ============
+* This repo has been deprecated *
+
+
+
+
+
+
 
 ### Purpose
 This library provides Android wrappers for the Zebra Crossing (zxing) Library. If you only need to scan barcodes and are only distributing on Google Play enabled devices, check out the new Google Mobile Vision libraries. The scanning component works fine, but was more or less included because it had already been built for other purposes.
